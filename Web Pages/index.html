@@ -1,28 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My personal portfolio</title>
+
+  <link rel="stylesheet" href="styles.css">
+  <script src="scripts.js" defer></script>
+
+  <!-- fonts connections -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
-    <header></header>
-    <body>
-        <video autoplay muted loop playsinline id="bg-video">
-            <source src="../Assets/morning.mp4" type="video/mp4">
-        </video>
-        <div id="main-column">
-            <div id="welcome-section" class="section">
+  <header class="main-nav">
+    <div class="nav-logo">PORTFOLIO</div>
+    <nav class="nav-links">
+      <a href="#section-1">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <!-- Resume Button-->
+    <a href="Assets/Resume.pdf" class="resume-btn" target="_blank">Resume</a>
+  </header>
 
-            </div>
-            <div id="about-section" class="section">
+  <div id="wrapper">
+    <div class="animated-background">
+      <video autoplay muted loop playsinline id="bg-video">
+        <source src="../Assets/morning.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="parallax-foreground"></div>
+    <!-- MAIN HERO SECTION -->
+    <div id="section-1" class="grid-container section">
+      <h1>My Personal Portfolio</h1>
+      <p>Power Apps Developer</p>
+    </div>
+    <div class="grid-container section filler" id="about">
+      <h2>About Me</h2>
+      <div class="about-content">
+          <p>
+            I am a Power Apps Developer with 1 year of hands-on experience building
+            business applications and workflow automations using Microsoft Power Platform.
+            I specialize in creating efficient, user-friendly solutions with Power Apps,
+            Power Automate, and SharePoint.
+          </p>
 
-            </div>
+          <p>
+            My focus is on improving business processes, reducing manual work, and
+            delivering reliable internal tools that help teams work faster and smarter.
+            I enjoy turning complex requirements into simple, functional applications.
+          </p>
+
+          <div class="about-tags">
+            <span>Power Apps</span>
+            <span>Power Automate</span>
+            <span>SharePoint</span>
+            <span>Dataverse</span>
+            <span>UI/UX</span>
+          </div>
         </div>
-    </body>
-    <footer>
+    </div>
+    <div class="grid-container section filler">
+      <div class="grid-container section filler" id="projects">
+        <h2>Projects</h2>
 
-    </footer>
+        <div class="project-grid">
+          <div class="project-card">
+            <h3>Inventory Tracking App</h3>
+            <p>Built using Power Apps + SharePoint backend.</p>
+          </div>
 
+          <div class="project-card">
+            <h3>Leave Request System</h3>
+            <p>Automated approvals using Power Automate.</p>
+          </div>
+
+          <div class="project-card">
+            <h3>Employee Onboarding Tool</h3>
+            <p>End-to-end onboarding automation with SharePoint site intranet</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-container section filler">
+      <div class="grid-container section filler" id="contact">
+        <h2>Contact Me</h2>
+
+        <form class="contact-form">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+          <textarea placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <footer></footer>
 </body>
 </html>
