@@ -77,3 +77,28 @@ window.addEventListener("scroll", () => {
   });
 });
 
+// SKILL TAGS >>> Fade-in for About Me tags when section appears
+const aboutSection = document.querySelector("#about");
+const tagItems = document.querySelectorAll(".tag-item");
+
+const observerOptions = {
+  threshold: 0.2  // trigger when 20% of section is visible
+};
+
+const aboutObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+
+      // Play staggered animations
+      tagItems.forEach((item, index) => {
+        item.style.animation = `tagFadeIn 1.2s ease forwards`;
+        item.style.animationDelay = `${0.1 * index}s`;
+      });
+
+      // Stop observing after animation is done
+      aboutObserver.unobserve(aboutSection);
+    }
+  });
+}, observerOptions);
+
+aboutObserver.observe(aboutSection);
