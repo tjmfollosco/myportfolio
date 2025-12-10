@@ -107,6 +107,7 @@ p, input, textarea {
   font-size: 0.75rem;
   color: #00ffff;
   text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  visibility: hidden;
 }
 
 /* Center Links */
@@ -591,6 +592,7 @@ p, input, textarea {
     }
 }
 
+/* CONTACT SECTION */
 .contact-form {
   max-width: 480px;
   display: flex;
