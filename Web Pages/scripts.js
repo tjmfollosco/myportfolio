@@ -42,16 +42,29 @@ window.addEventListener("scroll", () => {
 });
 
 // nav bar
+const nav = document.querySelector(".main-nav");
 const navLinks = document.querySelectorAll(".main-nav nav a");
 const sections = document.querySelectorAll(".section");
+const screenHeight = screen.height * 0.9;
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > screenHeight) {
+    nav.classList.add("scrolled");
+  } else {
+    nav.classList.remove("scrolled");
+  }
+});
 
 window.addEventListener("scroll", () => {
   let current = "";
 
   sections.forEach(section => {
     const sectionTop = section.offsetTop - 120;
-    if (scrollY >= sectionTop) {
+    const sectionHeight = section.offsetHeight;
+    if (scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
       current = section.getAttribute("id");
+      console.log(window.scrollY, " window.scrollY");
+      console.log(section.id);
     }
   });
 
@@ -59,7 +72,33 @@ window.addEventListener("scroll", () => {
     link.classList.remove("active");
     if (link.getAttribute("href") === `#${current}`) {
       link.classList.add("active");
+      // console.log(navLinks.values)
     }
   });
 });
 
+// SKILL TAGS >>> Fade-in for About Me tags when section appears
+const aboutSection = document.querySelector("#about");
+const tagItems = document.querySelectorAll(".tag-item");
+
+const observerOptions = {
+  threshold: 0.2  // trigger when 20% of section is visible
+};
+
+const aboutObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+
+      // Play staggered animations
+      tagItems.forEach((item, index) => {
+        item.style.animation = `tagFadeIn 1.2s ease forwards`;
+        item.style.animationDelay = `${0.1 * index}s`;
+      });
+
+      // Stop observing after animation is done
+      aboutObserver.unobserve(aboutSection);
+    }
+  });
+}, observerOptions);
+
+aboutObserver.observe(aboutSection);
