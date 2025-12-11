@@ -234,6 +234,8 @@ p, input, textarea {
   transition: 0.35s ease;
 
   box-shadow: 0 0 10px rgba(0, 234, 255, 0.22);
+
+  visibility: hidden;
 }
 
 .resume-btn::before {
@@ -270,10 +272,10 @@ p, input, textarea {
   box-shadow: 0 6px 24px rgba(157, 75, 255, 0.18);
 }
 
-/* offset for fixed nav */
+/* offset for fixed nav
 .section {
   scroll-margin-top: 90px;
-}
+} */
 
 /* ========== LAYOUT SECTIONS ========== */
 .section {
@@ -334,93 +336,109 @@ p, input, textarea {
   color: var(--arcade-blue);
 }
 
-/* HERO CTA (smaller) */
-.hero-cta {
-  margin-top: 26px;
-  align-self: center;
+/* HERO SECTION FIXES */
+#hero {
+  min-height: calc(100vh - 64px); /* subtract navbar height */
+  padding-top: 64px; /* ensure proper spacing from nav */
+  margin-bottom: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical centering */
+  align-items: center;      /* horizontal centering */
+  text-align: center;
+  gap: 18px; /* consistent spacing between title, subtitle, CTA */
+}
 
+/* Improve heading spacing */
+#hero h1 {
+  margin: 0;
+  padding: 0;
+}
+
+/* Improve subheading spacing */
+#hero p {
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+
+/* CTA spacing fix */
+.hero-cta {
+  margin-top: 10px;          /* tighten spacing below subtitle */
+  align-self: center;        /* ensure centered */
+}
+
+/* PLAYER 1 SELECT — TEXT ONLY STYLE */
+.player1-btn {
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+
+  color: var(--arcade-yellow);
+  text-decoration: none;
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  padding: 9px 18px;
-  border: 2px solid var(--arcade-blue);
-  color: var(--arcade-yellow);
-  text-decoration: none;
-  font-size: 0.62rem;
-  letter-spacing: 0.8px;
+  margin-top: 12px;
 
-  position: relative;
-  overflow: hidden;
-  background: rgba(0,0,0,0.6);
+  text-shadow:
+    0 0 8px var(--arcade-yellow),
+    0 0 16px var(--arcade-yellow);
 
-  max-width: 240px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-
-  transition: 0.3s ease;
-  box-shadow:
-    0 0 10px rgba(0, 234, 255, 0.18),
-    0 0 18px rgba(157, 75, 255, 0.06);
+  animation: player1Blink 1s steps(2) infinite;
 }
 
-.hero-cta::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(0, 234, 255, 0.6),
-    transparent
-  );
-  transform: translateX(-120%);
-  transition: 0.5s ease;
-}
-
-.hero-cta:hover::before {
-  transform: translateX(120%);
-}
-
-.hero-cta:hover {
-  background: var(--arcade-blue);
-  color: black;
-  box-shadow:
-    0 0 18px rgba(0, 234, 255, 0.55),
-    0 0 28px rgba(157, 75, 255, 0.28);
-  transform: translateY(-2px);
-}
-
-/* CTA pulse (shared with nav if desired) */
-@keyframes cyberGlowPulse {
+/* Flicker/blink effect */
+@keyframes player1Blink {
   0% {
-    box-shadow:
-      0 0 10px rgba(0, 234, 255, 0.18),
-      0 0 18px rgba(157, 75, 255, 0.08);
-    filter: brightness(1);
+    color: var(--arcade-yellow);
+    text-shadow:
+      0 0 8px var(--arcade-yellow),
+      0 0 16px var(--arcade-yellow);
   }
   50% {
-    box-shadow:
-      0 0 18px rgba(0, 234, 255, 0.35),
-      0 0 34px rgba(157, 75, 255, 0.18);
-    filter: brightness(1.03);
+    color: white;
+    text-shadow:
+      0 0 12px white,
+      0 0 22px var(--arcade-blue);
   }
   100% {
-    box-shadow:
-      0 0 10px rgba(0, 234, 255, 0.18),
-      0 0 18px rgba(157, 75, 255, 0.08);
-    filter: brightness(1);
+    color: var(--arcade-yellow);
+    text-shadow:
+      0 0 8px var(--arcade-yellow),
+      0 0 16px var(--arcade-yellow);
   }
 }
 
-/* apply subtle idle pulse to hero CTA (optional) */
-.hero-cta {
-  animation: cyberGlowPulse 4s ease-in-out infinite;
+/* Blue arrow wiggle indicator */
+.player1-btn::before {
+  content: "▶";
+  position: absolute;
+  left: -28px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--arcade-blue);
+  font-size: 0.9rem;
+  animation: triangleWiggle 0.4s infinite alternate;
 }
-.hero-cta:hover {
-  animation: none;
+
+@keyframes triangleWiggle {
+  from { transform: translateY(-50%) translateX(0); }
+  to   { transform: translateY(-50%) translateX(4px); }
 }
+
+/* Hover state = SELECTED */
+.player1-btn:hover {
+  color: var(--arcade-pink);
+  text-shadow:
+    0 0 12px var(--arcade-pink),
+    0 0 22px var(--arcade-pink),
+    0 0 30px var(--arcade-yellow);
+  animation: none; /* stop blinking on hover */
+}
+
+
 
 /* ========== PROJECTS (CLEAN ARCADE - IMAGE TOP layout) ========== */
 .filler h2 {
