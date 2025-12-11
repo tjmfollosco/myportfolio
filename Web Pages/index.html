@@ -12,162 +12,185 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet"> -->
 
 </head>
 
 <body>
+  <!-- NAVIGATION -->
   <header class="main-nav">
     <div class="nav-logo">PORTFOLIO</div>
+
     <nav class="nav-links">
       <a href="#hero">Home</a>
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
     </nav>
-    <!-- Resume Button-->
+
     <a href="Assets/Resume.pdf" class="resume-btn" target="_blank">Resume</a>
   </header>
 
+
+  <!-- WRAPPER -->
   <div id="wrapper">
+
+    <!-- Background Video -->
     <div class="animated-background">
       <video autoplay muted loop playsinline id="bg-video">
         <source src="../Assets/morning.mp4" type="video/mp4">
       </video>
     </div>
+
+    <!-- Parallax Foreground -->
     <div class="parallax-foreground"></div>
-    <!-- MAIN HERO SECTION -->
-    <div id="hero" class="grid-container section">
+
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="grid-container section">
       <h1>My Personal Portfolio</h1>
       <p>Power Apps Developer</p>
 
-      <!-- HERO CTA BUTTON -->
       <a href="#projects" class="hero-cta">View My Work</a>
-    </div>
+    </section>
+
+
     <!-- ABOUT SECTION -->
-    <div id="about" class="grid-container section filler">
+    <section id="about" class="grid-container section filler">
       <h2>About Me</h2>
+
       <div class="about-content">
-          <p>
-            I am a Power Apps Developer with 1 year of hands-on experience building
-            business applications and workflow automations using Microsoft Power Platform.
-            I specialize in creating efficient, user-friendly solutions with Power Apps,
-            Power Automate, and SharePoint.
-          </p>
+        <p>
+          I am a Power Apps Developer with 1 year of hands-on experience building
+          business applications and workflow automations using Microsoft Power Platform.
+          I specialize in creating efficient, user-friendly solutions with Power Apps,
+          Power Automate, and SharePoint.
+        </p>
 
-          <p>
-            My focus is on improving business processes, reducing manual work, and
-            delivering reliable internal tools that help teams work faster and smarter.
-            I enjoy turning complex requirements into simple, functional applications.
-          </p>
+        <p>
+          My focus is on improving business processes, reducing manual work, and
+          delivering reliable internal tools that help teams work faster and smarter.
+          I enjoy turning complex requirements into simple, functional applications.
+        </p>
 
-          <p>
-            Outside of work, I stay active through running and playing sports. It keeps my mind sharp when I return to solving technical challenges.
-          </p>
+        <p>
+          Outside of work, I stay active through running and playing sports. It keeps my mind sharp
+          when I return to solving technical challenges.
+        </p>
 
-          <div class="about-tags">
-            <!-- Row 1 -->
-            <div class="tag-row">
-              <div class="tag-item">
-                <img src="../Assets/POWER PLATFORM ICONS/PowerPlatform_scalable.svg" alt="Power Platform Icon">
-                <span>Power Platform</span>
-              </div>
-              <div class="tag-item">
-                <img src="../Assets/POWER PLATFORM ICONS/PowerApps_scalable.svg" alt="Power Apps Icon">
-                <span>Power Apps</span>
-              </div>
-              <div class="tag-item">
-                <img src="../Assets/POWER PLATFORM ICONS/PowerAutomate_scalable.svg" alt="Power Automate Icon">
-                <span>Power Automate</span>
-              </div>
-              <div class="tag-item">
-                <img src="../Assets/POWER PLATFORM ICONS/SharePoint_scalable.svg" alt="SharePoint Icon">
-                <span>SharePoint</span>
-              </div>
-              <div class="tag-item">
-                <img src="../Assets/POWER PLATFORM ICONS/Dataverse_scalable.svg" alt="Dataverse Icon">
-                <span>Dataverse</span>
-              </div>
-              <div class="tag-item">
-                <img src="../Assets/POWER PLATFORM ICONS/PowerFx_scalable.svg" alt="PowerFX Icon">
-                <span>Power Fx</span>
-              </div>
+        <!-- TAG ICON ROWS -->
+        <div class="about-tags">
+
+          <!-- Row 1 -->
+          <div class="tag-row">
+            <div class="tag-item">
+              <img src="../Assets/POWER PLATFORM ICONS/PowerPlatform_scalable.svg" alt="Power Platform Icon">
+              <span>Power Platform</span>
             </div>
-            <!-- Row 2 -->
-            <div class="tag-row">
-              <div class="tag-item">
-                <img src="../Assets/SKILLS ICON/HTML5_icon.svg" alt="HTML Icon">
-                <span>HTML</span>
-              </div>
-              <div class="tag-item">
-                <img src="../Assets/SKILLS ICON/CSS3_icon.svg" alt="CSS Icon">
-                <span>CSS</span>
-              </div>
-              <div class="tag-item">
-                <img src="../Assets/SKILLS ICON/JavaScript_icon.svg" alt="JavaScript Icon">
-                <span>JavaScript</span>
-              </div>
-              <div class="tag-item">
-                <img src="../Assets/SKILLS ICON/Git_icon.svg" alt="Git Icon">
-                <span>Git</span>
-              </div>
+
+            <div class="tag-item">
+              <img src="../Assets/POWER PLATFORM ICONS/PowerApps_scalable.svg" alt="Power Apps Icon">
+              <span>Power Apps</span>
+            </div>
+
+            <div class="tag-item">
+              <img src="../Assets/POWER PLATFORM ICONS/PowerAutomate_scalable.svg" alt="Power Automate Icon">
+              <span>Power Automate</span>
+            </div>
+
+            <div class="tag-item">
+              <img src="../Assets/POWER PLATFORM ICONS/SharePoint_scalable.svg" alt="SharePoint Icon">
+              <span>SharePoint</span>
+            </div>
+
+            <div class="tag-item">
+              <img src="../Assets/POWER PLATFORM ICONS/Dataverse_scalable.svg" alt="Dataverse Icon">
+              <span>Dataverse</span>
+            </div>
+
+            <div class="tag-item">
+              <img src="../Assets/POWER PLATFORM ICONS/PowerFx_scalable.svg" alt="PowerFX Icon">
+              <span>Power Fx</span>
             </div>
           </div>
-        </div>
-    </div>
-    <!-- PROJECT SECTION -->
-    <div id="projects" class="grid-container section filler">
-      <h2>Projects</h2>
-      <div class="project-grid">
-        <!-- Project 1 -->
-        <div class="project-card side-layout">
-             <div class="project-info">
-                <h3 class="project-title">Inventory Tracking App</h3>
-                 <p class="project-description">
-                      Built using Power Apps + SharePoint backend.
-                </p>
-                <a href="#" class="project-view-btn">View Project</a>
+
+          <!-- Row 2 -->
+          <div class="tag-row">
+            <div class="tag-item">
+              <img src="../Assets/SKILLS ICON/HTML5_icon.svg" alt="HTML Icon">
+              <span>HTML</span>
             </div>
-            <img 
-                  src="https://wallpaperaccess.com/full/5648096.jpg"
-                  alt="Placeholder"
-                  class="project-preview side-img"
-              >
-        </div>
-        <!-- Project 2 -->
-        <div class="project-card side-layout">
-            <div class="project-info">
-                <h3 class="project-title">Leave Request System</h3>
-                <p class="project-description">
-                    Automated approvals using Power Automate.
-                </p>
-                <a href="#" class="project-view-btn">View Project</a>
+
+            <div class="tag-item">
+              <img src="../Assets/SKILLS ICON/CSS3_icon.svg" alt="CSS Icon">
+              <span>CSS</span>
             </div>
-            <img 
-                src="https://i.pinimg.com/originals/7c/2f/4b/7c2f4bfbaa411a9ef5b45bd0b4214fba.jpg"
-                alt="Placeholder"
-                class="project-preview side-img"
-            >
-        </div>
-        <!-- Project 3 -->
-        <div class="project-card side-layout">
-            <div class="project-info">
-                <h3 class="project-title">Employee Onboarding Tool</h3>
-                <p class="project-description">
-                    End-to-end onboarding automation with SharePoint site intranet
-                </p>
-                <a href="#" class="project-view-btn">View Project</a>
+
+            <div class="tag-item">
+              <img src="../Assets/SKILLS ICON/JavaScript_icon.svg" alt="JavaScript Icon">
+              <span>JavaScript</span>
             </div>
-            <img 
-                src="https://wallpapercave.com/wp/wp9644716.jpg"
-                alt="Placeholder"
-                class="project-preview side-img"
-            >
+
+            <div class="tag-item">
+              <img src="../Assets/SKILLS ICON/Git_icon.svg" alt="Git Icon">
+              <span>Git</span>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
+    </section>
+
+
+    <!-- PROJECTS SECTION (fixed layout: image on top) -->
+    <section id="projects" class="grid-container section filler">
+      <h2>Projects</h2>
+
+      <div class="project-grid">
+
+        <!-- Project 1 -->
+        <div class="project-card">
+          <img
+            class="project-preview"
+            src="https://wallpaperaccess.com/full/5648096.jpg"
+            alt="Inventory Tracking Preview"
+          >
+          <h3>Inventory Tracking App</h3>
+          <p>Built using Power Apps + SharePoint backend.</p>
+          <a href="#" class="project-view-btn">View Project</a>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+          <img
+            class="project-preview"
+            src="https://i.pinimg.com/originals/7c/2f/4b/7c2f4bfbaa411a9ef5b45bd0b4214fba.jpg"
+            alt="Leave Request Preview"
+          >
+          <h3>Leave Request System</h3>
+          <p>Automated approvals using Power Automate.</p>
+          <a href="#" class="project-view-btn">View Project</a>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card">
+          <img
+            class="project-preview"
+            src="https://wallpapercave.com/wp/wp9644716.jpg"
+            alt="Employee Onboarding Preview"
+          >
+          <h3>Employee Onboarding Tool</h3>
+          <p>End-to-end onboarding automation with SharePoint site intranet.</p>
+          <a href="#" class="project-view-btn">View Project</a>
+        </div>
+
+      </div>
+    </section>
+
+
     <!-- CONTACT SECTION -->
-    <div id="contact" class="grid-container section filler" >
+    <section id="contact" class="grid-container section filler">
       <h2>Contact Me</h2>
 
       <form class="contact-form">
@@ -176,8 +199,11 @@
         <textarea placeholder="Your Message" required></textarea>
         <button type="submit">Send Message</button>
       </form>
-    </div>
+    </section>
+
   </div>
+
   <footer></footer>
 </body>
+
 </html>
