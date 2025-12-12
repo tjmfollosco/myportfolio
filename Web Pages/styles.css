@@ -467,13 +467,13 @@ p, input, textarea {
   overflow: visible;
 }
 
-/* Pixel corner accents (Option B: corner accents only) */
+/* Pixel corner accents (Option B: corner accents only)
 .project-card::before,
 .project-card::after,
 .project-card .corner-tl,
 .project-card .corner-br {
-  /* we'll draw small pixel squares at corners using pseudo elements */
-}
+  /* draw small pixel squares at corners using pseudo elements
+} */
 
 /* Top-left pixel accent */
 .project-card::before {
@@ -614,6 +614,33 @@ p, input, textarea {
   box-shadow:
     -20px 0 0 var(--arcade-purple),
     0 -20px 0 var(--arcade-purple);
+}
+
+/* PLAYER BIO Header — Clean Yellow Arcade Style */
+/* PLAYER BIO — Data Panel Label Style */
+/* PLAYER BIO Header — Clean Yellow Version */
+.player-bio-title {
+  font-family: "Press Start 2P", monospace;
+  font-size: 1.3rem;
+  text-align: center;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+
+  color: var(--arcade-yellow) !important;
+  text-shadow:
+    0 0 6px rgba(255, 255, 120, 0.9) !important,
+    0 0 14px rgba(255, 255, 120, 0.6) !important;
+
+  display: block;
+  position: relative;
+  padding: 4px 0;
+  animation: bioFlicker 2.5s infinite ease-in-out;
+}
+
+/* Soft flicker (optional, remove animation above to disable) */
+@keyframes bioFlicker {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.92; }
 }
 
 
