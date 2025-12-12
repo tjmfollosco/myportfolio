@@ -86,6 +86,7 @@ p, input, textarea {
 
 /* ========== BACKGROUND VIDEO & PARALLAX ========== */
 /* fixed video background */
+/* Clean Neon Grid Background */
 .animated-background {
   position: fixed;
   inset: 0;
@@ -96,41 +97,30 @@ p, input, textarea {
   pointer-events: none;
 }
 
+/* Video sizing optimized for grid symmetry */
 #bg-video {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 110%;
-  height: 110%;
-  transform: translate(-50%, -50%) scale(1.05);
+  width: 140%;          /* give more room horizontally */
+  height: auto;         /* prevent vertical stretching */
+  transform: translate(-50%, -50%);
   object-fit: cover;
-  will-change: transform;
+  opacity: 0.55;        /* soften it so content pops */
+  filter: saturate(1.4) brightness(1);
 }
 
-/* dark radial overlay over video */
+/* subtle vignette for readability */
 .animated-background::after {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(
     circle at center,
-    rgba(0, 0, 0, 0.25),
-    rgba(0, 0, 0, 0.65)
+    rgba(0, 0, 0, 0.20),
+    rgba(0, 0, 0, 0.75)
   );
-}
-
-/* parallax foreground (keep in place, z-index -1) */
-.parallax-foreground {
-  position: fixed;
-  inset: 0;
-  background-image: url("../Assets/foreground.png");
-  background-size: cover;
-  background-position: center bottom;
-  background-repeat: no-repeat;
-  z-index: -1;
   pointer-events: none;
-  transform: translateY(0px);
-  will-change: transform;
 }
 
 /* ========== NAVBAR ========== */
@@ -150,6 +140,17 @@ p, input, textarea {
   border-bottom: 2px solid var(--arcade-purple);
   box-shadow: 0 0 8px rgba(157, 75, 255, 0.12);
   transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.main-nav.show-nav {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 /* logo */
@@ -574,17 +575,47 @@ p, input, textarea {
 }
 
 /* about content card (glass) */
+/* Arcade Pixel Corner Frame for About Section */
 .about-content {
-  background: var(--arcade-card-bg);
-  border-radius: 6px;
+  position: relative;
+  background: rgba(10, 10, 22, 0.7);
   border: 2px solid var(--arcade-purple);
-  backdrop-filter: blur(8px);
-  padding: 28px;
+  padding: 32px;
+  border-radius: 6px;
   max-width: 850px;
   margin: 0 auto;
-  box-shadow: 0 0 10px rgba(157, 75, 255, 0.12);
-  animation: fadeInUp 0.9s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 12px rgba(157, 75, 255, 0.25);
 }
+
+/* Top-left pixel corners */
+.about-content::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  background: var(--arcade-purple);
+  box-shadow:
+    20px 0 0 var(--arcade-purple),
+    0 20px 0 var(--arcade-purple);
+}
+
+/* Bottom-right pixel corners */
+.about-content::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  background: var(--arcade-purple);
+  box-shadow:
+    -20px 0 0 var(--arcade-purple),
+    0 -20px 0 var(--arcade-purple);
+}
+
 
 .about-content p {
   color: rgba(220, 235, 255, 0.94);
