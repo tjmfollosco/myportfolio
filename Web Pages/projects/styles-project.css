@@ -1,15 +1,19 @@
+/* ===============================
+   ROOT VARIABLES (ARCADE THEME)
+================================ */
 :root {
   --arcade-blue: #00eaff;
   --arcade-pink: #ff3be7;
   --arcade-purple: #9d4bff;
   --arcade-yellow: #ffe500;
   --arcade-bg: #0b0b14;
-  --arcade-card-bg: rgba(15, 15, 30, 0.6);
+  --arcade-card-bg: rgba(15, 15, 30, 0.65);
   --muted-white: rgba(230, 241, 255, 0.95);
 }
 
-/* ==RESET== */
-
+/* ===============================
+   RESET
+================================ */
 * {
   margin: 0;
   padding: 0;
@@ -20,8 +24,130 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ===============================
+   BASE
+================================ */
+body {
+  background: var(--arcade-bg);
+  color: var(--muted-white);
+  font-family: "Roboto", sans-serif;
+  line-height: 1.7;
+}
 
-/* TECH STACKS ICON */
+/* ===============================
+   WRAPPER
+================================ */
+#wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 64px 20px 120px;
+}
+
+/* ===============================
+   HERO
+================================ */
+#hero {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+#hero h1 {
+  font-family: "Press Start 2P", monospace;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  color: var(--arcade-yellow);
+  text-shadow:
+    0 0 8px rgba(255, 229, 0, 0.6),
+    0 0 16px rgba(255, 229, 0, 0.35);
+}
+
+/* ===============================
+   SECTION CARDS
+================================ */
+#wrapper > div:not(#hero) {
+  background: var(--arcade-card-bg);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 36px;
+  margin-bottom: 48px;
+  backdrop-filter: blur(6px);
+}
+
+/* ===============================
+   SECTION HEADERS
+================================ */
+h2 {
+  font-family: "Press Start 2P", monospace;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+  color: var(--arcade-blue);
+  text-shadow: 0 0 8px rgba(0,234,255,0.4);
+}
+
+/* ===============================
+   TEXT
+================================ */
+p {
+  font-size: 0.95rem;
+  opacity: 0.95;
+}
+
+p + p {
+  margin-top: 14px;
+}
+
+/* ===============================
+   FEATURES
+================================ */
+.feature-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.feature-list li {
+  padding-left: 14px;
+  border-left: 3px solid var(--arcade-purple);
+}
+
+.feature-list strong {
+  display: inline-block;
+  margin-bottom: 4px;
+  color: var(--arcade-yellow);
+  font-weight: 500;
+}
+
+/* ===============================
+   SCREENSHOTS
+================================ */
+.screenshot-gallery {
+  margin-top: 24px;
+  min-height: 180px;
+  border: 1px dashed rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.85rem;
+}
+
+/* ===============================
+   ROLE EMPHASIS
+================================ */
+#role {
+  border-left: 4px solid var(--arcade-pink);
+}
+
+/* ===============================
+   TECH STACK
+================================ */
+#tech-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
 
 .tech-icons {
   display: flex;
@@ -40,4 +166,21 @@ html {
 .tech-icons img:hover {
   transform: translateY(-3px);
   opacity: 1;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  #wrapper {
+    padding: 48px 16px 96px;
+  }
+
+  #hero h1 {
+    font-size: 1.4rem;
+  }
+
+  #wrapper > div:not(#hero) {
+    padding: 28px;
+  }
 }
