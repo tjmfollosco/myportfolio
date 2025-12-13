@@ -28,10 +28,49 @@ html {
    BASE
 ================================ */
 body {
-  background: var(--arcade-bg);
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255,255,255,0.06),
+      rgba(0,0,0,0.82)
+    ),
+    repeating-linear-gradient(
+      to right,
+      rgba(255,255,255,0.045) 0px,
+      rgba(255,255,255,0.045) 1px,
+      transparent 1px,
+      transparent 72px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.045) 0px,
+      rgba(255,255,255,0.045) 1px,
+      transparent 1px,
+      transparent 72px
+    ),
+    var(--arcade-bg);
+
   color: var(--muted-white);
   font-family: "Roboto", sans-serif;
   line-height: 1.7;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.015) 0px,
+    rgba(255,255,255,0.015) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+
+  opacity: 0.12;
 }
 
 /* ===============================
@@ -42,12 +81,54 @@ body {
   margin: 0 auto;
   padding: 64px 20px 120px;
 }
+/* ===============================
+   BREADCRUMB
+================================ */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  margin-bottom: 28px;
+
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.55rem;
+  letter-spacing: 1px;
+
+  color: rgba(255,255,255,0.7);
+}
+
+.breadcrumb a {
+  color: var(--arcade-blue);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--arcade-yellow);
+}
+
+.crumb-separator {
+  opacity: 0.4;
+}
+
+.breadcrumb .current {
+  color: var(--arcade-yellow);
+  text-shadow: 0 0 6px rgba(255,229,0,0.5);
+}
+
+@media (max-width: 768px) {
+  .breadcrumb {
+    font-size: 0.5rem;
+  }
+}
 
 /* ===============================
    HERO
 ================================ */
 #hero {
   text-align: center;
+  margin-top: 32px;
   margin-bottom: 64px;
 }
 
@@ -66,11 +147,12 @@ body {
 ================================ */
 #wrapper > div:not(#hero) {
   background: var(--arcade-card-bg);
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 59, 231, 0.65);
   border-radius: 8px;
   padding: 36px;
   margin-bottom: 48px;
   backdrop-filter: blur(6px);
+  box-shadow: 0 0 10px rgba(255, 59, 231, 0.25);
 }
 
 /* ===============================
@@ -98,14 +180,22 @@ p + p {
 }
 
 /* ===============================
-   FEATURES
+   FEATURES (Two-Column)
 ================================ */
 .feature-list {
   list-style: none;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 18px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 32px;
 }
+
+/* Single column on smaller screens */
+@media (max-width: 768px) {
+  .feature-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 .feature-list li {
   padding-left: 14px;
@@ -184,3 +274,165 @@ p + p {
     padding: 28px;
   }
 }
+
+/* ===============================
+   FLOATING BACK BUTTON
+================================ */
+.back-to-main {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 10000;
+
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+
+  color: var(--arcade-yellow);
+  text-decoration: none;
+
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid var(--arcade-blue);
+  border-radius: 6px;
+
+  box-shadow:
+    0 0 8px rgba(0, 234, 255, 0.35),
+    inset 0 0 6px rgba(0, 234, 255, 0.2);
+
+  transition: 
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* Hover / Focus */
+.back-to-main:hover {
+  background: var(--arcade-blue);
+  color: black;
+
+  box-shadow:
+    0 0 14px rgba(0, 234, 255, 0.8),
+    0 0 24px rgba(0, 234, 255, 0.5);
+
+  transform: translateY(-2px);
+}
+
+/* ===============================
+   DEVELOPER NOTE
+================================ */
+#developer-note {
+  border-left: 4px solid var(--arcade-blue);
+  background: rgba(15, 15, 30, 0.5);
+}
+
+#developer-note h2 {
+  color: var(--arcade-yellow);
+  text-shadow:
+    0 0 6px rgba(255, 229, 0, 0.5);
+}
+
+#developer-note p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.read-more-link {
+  display: inline-block;
+  margin-top: 14px;
+
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+
+  color: var(--arcade-blue);
+  text-decoration: none;
+
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(0,234,255,0.4);
+
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.read-more-link:hover {
+  color: var(--arcade-yellow);
+  border-color: var(--arcade-yellow);
+  transform: translateX(4px);
+}
+
+/* ===============================
+   BACK TO TOP BUTTON
+================================ */
+#back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 10000;
+
+  width: 42px;
+  height: 42px;
+
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.7rem;
+
+  color: var(--arcade-yellow);
+  background: rgba(0,0,0,0.65);
+
+  border: 2px solid var(--arcade-blue);
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 8px rgba(0,234,255,0.35),
+    inset 0 0 6px rgba(0,234,255,0.25);
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+#back-to-top:hover {
+  background: var(--arcade-blue);
+  color: black;
+
+  box-shadow:
+    0 0 14px rgba(0,234,255,0.8),
+    0 0 24px rgba(0,234,255,0.5);
+
+  transform: translateY(-2px);
+}
+
+/* visible state */
+#back-to-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* mobile tweak */
+@media (max-width: 768px) {
+  #back-to-top {
+    width: 38px;
+    height: 38px;
+    font-size: 0.6rem;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+/* 
+#back-to-top {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: none !important;
+  background: red !important;
+} */
