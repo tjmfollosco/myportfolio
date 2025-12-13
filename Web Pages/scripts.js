@@ -77,6 +77,27 @@ window.addEventListener("scroll", () => {
   });
 });
 
+const navBar = document.querySelector(".main-nav");
+const heroSection = document.querySelector("#hero");
+
+const heroObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Hide nav when hero is on screen
+        navBar.classList.remove("show-nav");
+      } else {
+        // Show nav when hero leaves
+        navBar.classList.add("show-nav");
+      }
+    });
+  },
+  { threshold: 0.3 }
+);
+
+heroObserver.observe(heroSection);
+
+
 // SKILL TAGS >>> Fade-in for About Me tags when section appears
 const aboutSection = document.querySelector("#about");
 const tagItems = document.querySelectorAll(".tag-item");

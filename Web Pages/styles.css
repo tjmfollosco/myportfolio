@@ -1,3 +1,20 @@
+/* ------------------------
+   CLEAN ARCADE THEME CSS
+   (Complete file)
+   ------------------------ */
+
+/* ========== COLOR VARIABLES ========== */
+:root {
+  --arcade-blue: #00eaff;
+  --arcade-pink: #ff3be7;
+  --arcade-purple: #9d4bff;
+  --arcade-yellow: #ffe500;
+  --arcade-bg: #0b0b14;
+  --arcade-card-bg: rgba(15, 15, 30, 0.6);
+  --muted-white: rgba(230, 241, 255, 0.95);
+}
+
+/* ========== RESET & BASE ========== */
 * {
   margin: 0;
   padding: 0;
@@ -9,28 +26,67 @@ html {
 }
 
 body {
-  background: black;
-  color: white;
-  font-family: "Roboto", sans-serif;
+  background: var(--arcade-bg);
+  color: var(--arcade-blue);
+  font-family: "Press Start 2P", monospace;
   overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* subtle CRT scanlines (soft, non-intrusive) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.02) 0px,
+    rgba(255,255,255,0.02) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.14;
+}
+
+/* Headings use retro font */
 h1, h2, h3 {
   font-family: "Press Start 2P", monospace;
 }
 
+/* h2 arcade style */
+h2 {
+  color: var(--arcade-pink);
+  text-align: center;
+  margin-bottom: 28px;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  text-shadow:
+    0 0 6px var(--arcade-pink),
+    0 0 14px var(--arcade-pink);
+}
+
+/* readable body text — keep it mono-ish but more readable */
 p, input, textarea {
+  font-family: "VT323", monospace;
   font-size: 0.95rem;
   line-height: 1.7;
   letter-spacing: 0.3px;
+  color: rgba(225, 245, 255, 0.95);
 }
 
+/* wrapper */
 #wrapper {
   position: relative;
   z-index: 1;
 }
 
-/*FIXED VIDEO BACKGROUND */
+/* ========== BACKGROUND VIDEO & PARALLAX ========== */
+/* fixed video background */
+/* Clean Neon Grid Background */
 .animated-background {
   position: fixed;
   inset: 0;
@@ -41,42 +97,33 @@ p, input, textarea {
   pointer-events: none;
 }
 
+/* Video sizing optimized for grid symmetry */
 #bg-video {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 110%;
-  height: 110%;
-  transform: translate(-50%, -50%) scale(1.05);
+  width: 140%;          /* give more room horizontally */
+  height: auto;         /* prevent vertical stretching */
+  transform: translate(-50%, -50%);
   object-fit: cover;
-  will-change: transform;
+  opacity: 0.55;        /* soften it so content pops */
+  filter: saturate(1.4) brightness(1);
 }
 
+/* subtle vignette for readability */
 .animated-background::after {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(
     circle at center,
-    rgba(0, 0, 0, 0.25),
-    rgba(0, 0, 0, 0.65)
+    rgba(0, 0, 0, 0.20),
+    rgba(0, 0, 0, 0.75)
   );
-}
-
-.parallax-foreground {
-  position: fixed;
-  inset: 0;
-  background-image: url("../Assets/foreground.png");
-  background-size: cover;
-  background-position: center bottom;
-  background-repeat: no-repeat;
-  z-index: -1;
   pointer-events: none;
-  transform: translateY(200px);
-  will-change: transform;
 }
 
-/* ===== NAV BAR ===== */
+/* ========== NAVBAR ========== */
 .main-nav {
   position: fixed;
   top: 0;
@@ -86,108 +133,112 @@ p, input, textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 10;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-  background: rgba(0, 0, 0, 0.05);
-  backdrop-filter: blur(1px);
-  /* border-bottom: 1px solid rgba(0, 255, 255, 0.25); */
+  z-index: 50;
+
+  background: rgba(8, 8, 18, 0.72);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid var(--arcade-purple);
+  box-shadow: 0 0 8px rgba(157, 75, 255, 0.12);
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.main-nav.scrolled {
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(0, 255, 255, 0.45);
-  box-shadow: 0 6px 20px rgba(0, 255, 255, 0.12);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+.main-nav.show-nav {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
-/* Logo */
+/* logo */
 .nav-logo {
   font-family: "Press Start 2P", monospace;
   font-size: 0.75rem;
-  color: #00ffff;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-  visibility: hidden;
+  color: var(--arcade-blue);
+  text-shadow: 0 0 10px rgba(0, 234, 255, 0.25);
 }
 
-/* Center Links */
+/* center links */
 .nav-links {
   display: flex;
   align-items: center;
   gap: 28px;
 }
 
+/* links style */
 .nav-links a {
   display: inline-flex;
   align-items: center;
   height: 40px;
   padding: 6px 8px;
   text-decoration: none;
-  color: white;
+  color: rgba(255,255,255,0.92);
   font-size: 0.75rem;
   opacity: 0.95;
   transition: 0.25s ease;
   line-height: 1;
+  position: relative;
 }
 
+/* hover */
 .nav-links a:hover {
-  color: #00ffff;
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+  color: var(--arcade-blue);
+  text-shadow: 0 0 8px rgba(0, 234, 255, 0.55);
   opacity: 1;
 }
 
-/* ===== ACTIVE NAV LINK ANIMATION ===== */
+/* active underline animation */
 .nav-links a {
   position: relative;
 }
 
-/* Animated underline */
 .nav-links a::after {
   content: "";
   position: absolute;
-  left: 10%;
-  bottom: 4px;
+  left: 12%;
+  bottom: 6px;
   width: 0%;
   height: 2px;
-  background: #00ffff;
-  box-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+  background: var(--arcade-blue);
+  box-shadow: 0 0 8px rgba(0, 234, 255, 0.8);
   transition: width 0.35s ease;
 }
 
-/* Active state */
 .nav-links a.active {
-  color: #00ffff;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+  color: var(--arcade-blue);
+  text-shadow: 0 0 10px rgba(0, 234, 255, 0.7);
 }
 
 .nav-links a.active::after {
-  width: 80%;
+  width: 76%;
 }
 
-
-/* ===== RESUME BUTTON  ===== */
+/* resume button on right */
 .resume-btn {
-  visibility: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: 40px;
   padding: 8px 20px;
 
-  border: 1px solid #00ffff;
-  color: #00ffff;
+  border: 2px solid var(--arcade-blue);
+  color: var(--arcade-yellow);
   text-decoration: none;
   font-size: 0.7rem;
 
   position: relative;
   overflow: hidden;
-  background: rgba(0, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.6);
   transition: 0.35s ease;
 
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.35);
+  box-shadow: 0 0 10px rgba(0, 234, 255, 0.22);
+
+  visibility: hidden;
 }
 
-/* Glow animation layer */
 .resume-btn::before {
   content: "";
   position: absolute;
@@ -195,7 +246,7 @@ p, input, textarea {
   background: linear-gradient(
     120deg,
     transparent,
-    rgba(0,255,255,0.6),
+    rgba(0,234,255,0.45),
     transparent
   );
   transform: translateX(-120%);
@@ -207,41 +258,27 @@ p, input, textarea {
 }
 
 .resume-btn:hover {
-  background: #00ffff;
+  background: var(--arcade-blue);
   color: black;
   box-shadow:
-    0 0 15px rgba(0, 255, 255, 0.8),
-    0 0 30px rgba(0, 255, 255, 0.6);
+    0 0 18px rgba(255, 59, 231, 0.3),
+    0 0 28px rgba(0, 234, 255, 0.5);
   transform: translateY(-2px);
 }
 
+/* sticky darken on scroll */
+.main-nav.scrolled {
+  background: rgba(6, 6, 12, 0.95);
+  border-color: var(--arcade-pink);
+  box-shadow: 0 6px 24px rgba(157, 75, 255, 0.18);
+}
 
-/* Offset for fixed nav */
+/* offset for fixed nav
 .section {
-  /* scroll-margin-top: 20px; */
-}
+  scroll-margin-top: 90px;
+} */
 
-/* ===== MOBILE SAFETY ===== */
-@media (max-width: 768px) {
-  .main-nav {
-    padding: 0 18px;
-  }
-
-  .nav-links {
-    gap: 14px;
-  }
-
-  .nav-links a {
-    font-size: 0.65rem;
-  }
-
-  .resume-btn {
-    padding: 6px 14px;
-    font-size: 0.65rem;
-  }
-}
-
-/*SECTIONS */
+/* ========== LAYOUT SECTIONS ========== */
 .section {
   min-height: 100vh;
   padding: 120px 10vw;
@@ -255,11 +292,12 @@ p, input, textarea {
   display: grid;
 }
 
+/* filler panels */
 .filler {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(8, 8, 12, 0.45);
 }
 
-/* -MOBILE SAFETY */
+/* mobile safety for bg video */
 @media (max-width: 768px) {
   .animated-background,
   .parallax-foreground {
@@ -271,191 +309,416 @@ p, input, textarea {
   }
 }
 
-/* ===== HERO REFINEMENT ===== */
-#hero {
+/* ========== HERO ========== */
+#section-1 {
   text-align: center;
   gap: 24px;
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,0.65),
-    rgba(0,0,0,0.35)
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.30)
   );
+  padding-top: 140px; /* ensure visual spacing under nav */
 }
 
-#hero h1 {
+#section-1 h1 {
   font-size: clamp(1.8rem, 4vw, 3.2rem);
-  letter-spacing: 2px;
-  text-shadow: 0 0 12px rgba(0,255,255,0.4);
-  transform: translate(0,60%);
+  letter-spacing: 3px;
+  color: var(--arcade-pink);
+  text-shadow:
+    0 0 12px rgba(255, 59, 231, 0.28),
+    0 0 22px rgba(157, 75, 255, 0.18);
+  margin-bottom: 12px;
 }
 
-#hero p {
+#section-1 p {
   font-size: 0.85rem;
-  opacity: 0.85;
-  color: #00ffff;
+  opacity: 0.95;
+  color: var(--arcade-blue);
 }
 
-/* ===== HERO CTA BUTTON ===== */
+/* HERO SECTION FIXES */
+#hero {
+  min-height: calc(100vh - 64px); /* subtract navbar height */
+  padding-top: 64px; /* ensure proper spacing from nav */
+  margin-bottom: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical centering */
+  align-items: center;      /* horizontal centering */
+  text-align: center;
+  gap: 18px; /* consistent spacing between title, subtitle, CTA */
+}
+
+/* Improve heading spacing */
+#hero h1 {
+  margin: 0;
+  padding: 0;
+}
+
+/* Improve subheading spacing */
+#hero p {
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+
+/* CTA spacing fix */
 .hero-cta {
-  margin-top: 4px;
-  align-self: center;
-  max-width: 240px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 10px;          /* tighten spacing below subtitle */
+  align-self: center;        /* ensure centered */
+}
+
+/* PLAYER 1 SELECT — TEXT ONLY STYLE */
+.player1-btn {
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+
+  color: var(--arcade-yellow);
+  text-decoration: none;
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  padding: 14px 28px;
-  border: 1px solid #00ffff;
-  color: #00ffff;
-  text-decoration: none;
-  font-size: 0.7rem;
-  letter-spacing: 1px;
+  margin-top: 12px;
 
-  position: relative;
-  overflow: hidden;
-  background: rgba(0, 255, 255, 0.08);
-  transform: translate(0, -200%);
+  text-shadow:
+    0 0 8px var(--arcade-yellow),
+    0 0 16px var(--arcade-yellow);
 
-  transition: 0.35s ease;
-  box-shadow: 0 0 14px rgba(0, 255, 255, 0.35),
-              0 0 28px rgba(0, 255, 255, 0.15);
+  animation: player1Blink 1s steps(2) infinite;
 }
 
-.hero-cta::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(0, 255, 255, 0.7),
-    transparent
-  );
-  transform: translateX(-120%);
-  transition: 0.6s ease;
-}
-
-.hero-cta:hover::before {
-  transform: translateX(120%);
-}
-
-.hero-cta:hover {
-  background: #00ffff;
-  color: black;
-  box-shadow:
-    0 0 20px rgba(0, 255, 255, 0.85),
-    0 0 40px rgba(0, 255, 255, 0.6);
-  transform: translateY(-3px);
-  transform: translate(0, -200%);
-}
-
-@keyframes ctaPulse {
+/* Flicker/blink effect */
+@keyframes player1Blink {
   0% {
-    box-shadow:
-      0 0 15px rgba(0, 255, 255, 0.25),
-      0 0 28px rgba(0, 255, 255, 0.12);
+    color: var(--arcade-yellow);
+    text-shadow:
+      0 0 8px var(--arcade-yellow),
+      0 0 16px var(--arcade-yellow);
   }
   50% {
-    box-shadow:
-      0 0 20px rgba(0, 255, 255, 0.45),
-      0 0 40px rgba(0, 255, 255, 0.25);
+    color: white;
+    text-shadow:
+      0 0 12px white,
+      0 0 22px var(--arcade-blue);
   }
   100% {
-    box-shadow:
-      0 0 15px rgba(0, 255, 255, 0.25),
-      0 0 28px rgba(0, 255, 255, 0.12);
+    color: var(--arcade-yellow);
+    text-shadow:
+      0 0 8px var(--arcade-yellow),
+      0 0 16px var(--arcade-yellow);
   }
 }
 
-/* Apply pulse when NOT hovering */
-.hero-cta {
-  animation: ctaPulse 2.8s ease-in-out infinite;
+/* Blue arrow wiggle indicator */
+.player1-btn::before {
+  content: "▶";
+  position: absolute;
+  left: -28px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--arcade-blue);
+  font-size: 0.9rem;
+  animation: triangleWiggle 0.4s infinite alternate;
 }
 
-.hero-cta:hover {
-  animation: none; 
+@keyframes triangleWiggle {
+  from { transform: translateY(-50%) translateX(0); }
+  to   { transform: translateY(-50%) translateX(4px); }
 }
 
-/* ===== ABOUT SECTION ===== */
+/* Hover state = SELECTED */
+.player1-btn:hover {
+  color: var(--arcade-pink);
+  text-shadow:
+    0 0 12px var(--arcade-pink),
+    0 0 22px var(--arcade-pink),
+    0 0 30px var(--arcade-yellow);
+  animation: none; /* stop blinking on hover */
+}
 
-/* ABOUT SECTION */
+
+
+/* ========== PROJECTS (CLEAN ARCADE - IMAGE TOP layout) ========== */
+.filler h2 {
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+  color: var(--arcade-pink);
+  text-shadow: 0 0 8px rgba(255, 59, 231, 0.18);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* card */
+.project-card {
+  background: var(--arcade-card-bg);
+  border: 2px solid var(--arcade-purple);
+  border-radius: 6px; /* slightly squared */
+  padding: 18px;
+  transition: 0.25s ease;
+  box-shadow: 0 0 10px rgba(157, 75, 255, 0.12);
+  position: relative;
+  overflow: visible;
+}
+
+/* Pixel corner accents (Option B: corner accents only)
+.project-card::before,
+.project-card::after,
+.project-card .corner-tl,
+.project-card .corner-br {
+  /* draw small pixel squares at corners using pseudo elements
+} */
+
+/* Top-left pixel accent */
+.project-card::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: -6px;
+  width: 14px;
+  height: 14px;
+  background: var(--arcade-purple);
+  box-shadow:
+    16px 0 0 var(--arcade-purple),
+    0 16px 0 var(--arcade-purple);
+  transform: translate(0,0);
+  border: 0;
+  z-index: 2;
+}
+
+/* Bottom-right pixel accent */
+.project-card::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  width: 14px;
+  height: 14px;
+  background: var(--arcade-purple);
+  box-shadow:
+    -16px 0 0 var(--arcade-purple),
+    0 -16px 0 var(--arcade-purple);
+  transform: translate(0,0);
+  border: 0;
+  z-index: 2;
+}
+
+/* image on top */
+.project-card .project-preview,
+.project-card img.project-preview {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 3px solid var(--arcade-blue);
+  padding: 4px; /* inner padding to show pixel border effect */
+  box-shadow:
+    0 0 8px rgba(0, 234, 255, 0.12),
+    inset 0 0 6px rgba(157, 75, 255, 0.04);
+  background: #07070b;
+  display: block;
+  margin-bottom: 14px;
+}
+
+/* image hover style (slight scale if chosen) - subtle */
+.project-card:hover img.project-preview {
+  transform: scale(1.02);
+  transition: transform 0.35s ease;
+}
+
+/* title & description */
+.project-card h3 {
+  margin-bottom: 8px;
+  color: var(--arcade-pink);
+  font-size: 0.95rem;
+  text-shadow: 0 0 6px rgba(255,59,231,0.08);
+}
+
+.project-card p {
+  color: rgba(220, 235, 255, 0.9);
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* project view button (arcade) */
+.project-view-btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 4px;
+  border: 2px solid var(--arcade-blue);
+  background: rgba(0,0,0,0.6);
+  color: var(--arcade-yellow);
+  text-decoration: none;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.65rem;
+  transition: 0.2s ease;
+}
+
+.project-view-btn:hover {
+  border-color: var(--arcade-pink);
+  box-shadow: 0 0 12px rgba(255, 59, 231, 0.22);
+  transform: translateY(-3px);
+}
+
+/* ========== ABOUT SECTION (improved vanilla layout) ========== */
 #about h2 {
   text-align: center;
   margin-bottom: 26px;
-  color: #00ffff;
+  color: var(--arcade-pink);
 }
 
-/* Container */
+/* about content card (glass) */
+/* Arcade Pixel Corner Frame for About Section */
 .about-content {
-  background: rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(0, 255, 255, 0.18);
-  backdrop-filter: blur(8px);
+  position: relative;
+  background: rgba(10, 10, 22, 0.7);
+  border: 2px solid var(--arcade-purple);
   padding: 32px;
-  border-radius: 16px;
+  border-radius: 6px;
   max-width: 850px;
   margin: 0 auto;
-  box-shadow: 0 0 14px rgba(0, 255, 255, 0.15);
-  animation: fadeInUp 0.9s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 12px rgba(157, 75, 255, 0.25);
 }
+
+/* Top-left pixel corners */
+.about-content::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  background: var(--arcade-purple);
+  box-shadow:
+    20px 0 0 var(--arcade-purple),
+    0 20px 0 var(--arcade-purple);
+}
+
+/* Bottom-right pixel corners */
+.about-content::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  background: var(--arcade-purple);
+  box-shadow:
+    -20px 0 0 var(--arcade-purple),
+    0 -20px 0 var(--arcade-purple);
+}
+
+/* PLAYER BIO Header — Clean Yellow Arcade Style */
+/* PLAYER BIO — Data Panel Label Style */
+/* PLAYER BIO Header — Clean Yellow Version */
+.player-bio-title {
+  font-family: "Press Start 2P", monospace;
+  font-size: 1.3rem;
+  text-align: center;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+
+  color: var(--arcade-yellow) !important;
+  text-shadow:
+    0 0 6px rgba(255, 255, 120, 0.9) !important,
+    0 0 14px rgba(255, 255, 120, 0.6) !important;
+
+  display: block;
+  position: relative;
+  padding: 4px 0;
+  animation: bioFlicker 2.5s infinite ease-in-out;
+}
+
+/* Soft flicker (optional, remove animation above to disable) */
+@keyframes bioFlicker {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.92; }
+}
+
 
 .about-content p {
-  color: #d8f9ff;
+  color: rgba(220, 235, 255, 0.94);
   line-height: 1.6;
   margin-bottom: 16px;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
-/* Tags */
+/* Tag rows container (two fixed rows) */
 .about-tags {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 22px; /* spacing between row 1 & row 2 */
-  margin-top: 22px;
+  gap: 18px; /* space between rows */
+  margin-top: 18px;
 }
 
+/* each row */
 .tag-row {
   display: flex;
-  gap: 22px;
+  gap: 18px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
+/* each tag item: icon + label */
 .tag-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  opacity: 0; /* start hidden */
-  transform: translateY(12px);  
+  opacity: 0;              /* hidden initially; JS triggers animation */
+  transform: translateY(8px);
 }
 
+/* icon styling */
 .tag-item img {
   width: 48px;
   height: 48px;
-  padding: 8px;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(0, 255, 255, 0.25);
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.12);
+  padding: 6px;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.45);
+  border: 2px solid var(--arcade-blue);
+  box-shadow: 0 0 8px rgba(0, 234, 255, 0.10);
+  object-fit: contain;
   transition: 0.25s ease;
 }
 
 .tag-item img:hover {
   transform: translateY(-3px);
-  background: rgba(0, 255, 255, 0.2);
-  box-shadow: 0 0 14px rgba(0, 255, 255, 0.35);
+  border-color: var(--arcade-pink);
+  box-shadow: 0 0 14px rgba(255, 59, 231, 0.18);
 }
 
+/* label under icon */
 .tag-item span {
-  color: #bffaff;
+  color: rgba(190, 250, 255, 0.95);
   font-family: "Roboto", sans-serif;
-  font-size: 0.75rem;
-  opacity: 0.9;
+  font-size: 0.72rem;
+  opacity: 0.95;
 }
 
+/* ========== ANIMATIONS (fade in etc) ========== */
+/* gentle section fade-in from below */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* tag-item fade-in keyframes (used by JS or class toggle) */
 @keyframes tagFadeIn {
   0% {
     opacity: 0;
@@ -467,132 +730,26 @@ p, input, textarea {
   }
 }
 
-.tag-row .tag-item:nth-child(1) { animation-delay: 0.1s; }
-.tag-row .tag-item:nth-child(2) { animation-delay: 0.2s; }
-.tag-row .tag-item:nth-child(3) { animation-delay: 0.3s; }
-.tag-row .tag-item:nth-child(4) { animation-delay: 0.4s; }
-.tag-row .tag-item:nth-child(5) { animation-delay: 0.5s; }
-.tag-row .tag-item:nth-child(6) { animation-delay: 0.6s; }
-.tag-row:nth-child(2) .tag-item:nth-child(1) { animation-delay: 0.7s; }
-.tag-row:nth-child(2) .tag-item:nth-child(2) { animation-delay: 0.8s; }
-.tag-row:nth-child(2) .tag-item:nth-child(3) { animation-delay: 0.9s; }
-.tag-row:nth-child(2) .tag-item:nth-child(4) { animation-delay: 1.0s; }
-
-
-
-/* ===== PROJECT & CONTACT SECTIONS ===== */
-.filler {
-  backdrop-filter: blur(6px);
-  border-top: 1px solid rgba(255,255,255,0.08);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+/* helper class if you prefer to toggle class instead of inline style */
+.tag-item.fade-in {
+  animation: tagFadeIn 0.6s ease forwards;
 }
 
-.filler h2 {
-  font-size: 1.2rem;
-  margin-bottom: 24px;
-  color: #00ffff;
-  text-shadow: 0 0 8px rgba(0,255,255,0.4);
-}
+/* a small stagger fallback for plain CSS-only: first 6 items */
+.tag-row .tag-item:nth-child(1) { animation-delay: 0.12s; }
+.tag-row .tag-item:nth-child(2) { animation-delay: 0.22s; }
+.tag-row .tag-item:nth-child(3) { animation-delay: 0.32s; }
+.tag-row .tag-item:nth-child(4) { animation-delay: 0.42s; }
+.tag-row .tag-item:nth-child(5) { animation-delay: 0.52s; }
+.tag-row .tag-item:nth-child(6) { animation-delay: 0.62s; }
 
-.filler p {
-  opacity: 0.8;
-  max-width: 640px;
-  line-height: 1.8;
-}
+/* second row offsets */
+.tag-row:nth-of-type(2) .tag-item:nth-child(1) { animation-delay: 0.72s; }
+.tag-row:nth-of-type(2) .tag-item:nth-child(2) { animation-delay: 0.82s; }
+.tag-row:nth-of-type(2) .tag-item:nth-child(3) { animation-delay: 0.92s; }
+.tag-row:nth-of-type(2) .tag-item:nth-child(4) { animation-delay: 1.02s; }
 
-.project-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-/* Base card */
-.project-card {
-    background: rgba(0, 0, 0, 0.45);
-    padding: 22px;
-    border-radius: 14px;
-    border: 1px solid rgba(0, 255, 255, 0.18);
-    backdrop-filter: blur(6px);
-    transition: 0.3s ease;
-}
-
-/* Hover glow */
-.project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 14px rgba(0, 255, 255, 0.25);
-}
-
-/* SIDE-BY-SIDE LAYOUT */
-.side-layout {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-}
-
-/* Left text section */
-.project-info {
-    flex: 1;
-}
-
-.project-card h3 {
-  margin-bottom: 12px;
-  color: #00ffff;
-  font-family: "Press Start 2P", monospace;
-}
-
-/* Image on right */
-.side-img {
-    width: 40%;
-    min-width: 260px;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 10px;
-    border: 1px solid rgba(0, 255, 255, 0.22);
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.15);
-}
-
-/* (Deprecated for old grid) — safe to keep but unused */
-/* .project-preview {
-    display: none;
-} */
-
-/* Button */
-.project-view-btn {
-    display: inline-block;
-    margin-top: 12px;
-    padding: 10px 18px;
-    border-radius: 8px;
-    color: #e8faff;
-    text-decoration: none;
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-    background: rgba(0, 255, 255, 0.12);
-    border: 1px solid rgba(0, 255, 255, 0.28);
-    transition: 0.25s ease;
-}
-
-.project-view-btn:hover {
-    background: rgba(0, 255, 255, 0.22);
-    box-shadow:
-        0 0 12px rgba(0, 255, 255, 0.35),
-        0 0 18px rgba(0, 255, 255, 0.15);
-}
-
-/* RESPONSIVE (mobile stacking) */
-@media (max-width: 820px) {
-    .side-layout {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .side-img {
-        width: 100%;
-        height: 180px;
-    }
-}
-
-/* CONTACT SECTION */
+/* ========== CONTACT FORM (retain styling) ========== */
 .contact-form {
   max-width: 480px;
   display: flex;
@@ -602,23 +759,87 @@ p, input, textarea {
 
 .contact-form input,
 .contact-form textarea {
-  background: black;
-  border: 1px solid #00ffff;
+  background: rgba(0,0,0,0.65);
+  border: 2px solid var(--arcade-blue);
   padding: 12px;
-  color: white;
+  color: var(--muted-white);
   font-family: inherit;
+  border-radius: 4px;
 }
 
 .contact-form button {
-  background: #00ffff;
+  background: var(--arcade-blue);
   color: black;
   padding: 12px;
   border: none;
   cursor: pointer;
   font-family: inherit;
   transition: 0.3s ease;
+  border: 2px solid var(--arcade-blue);
 }
 
 .contact-form button:hover {
-  background: white;
+  background: var(--arcade-pink);
+  color: #111;
+  box-shadow: 0 0 12px rgba(255, 59, 231, 0.18);
 }
+
+/* ========== RESPONSIVE & MOBILE ========== */
+@media (max-width: 820px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    padding: 18px;
+  }
+
+  .project-card::before,
+  .project-card::after {
+    display: none; /* hide corner accents on small screens for cleanliness */
+  }
+
+  .hero-cta {
+    max-width: 320px;
+  }
+
+  .nav-links {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  #section-1 {
+    padding-top: 120px;
+  }
+
+  .about-content {
+    padding: 20px;
+  }
+
+  .tag-item img {
+    width: 42px;
+    height: 42px;
+    padding: 5px;
+  }
+
+  .project-card .project-preview {
+    height: 160px;
+  }
+}
+
+/* ========== UTILITY (tiny helpers) ========== */
+/* center content container helper */
+.center-max {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* small fade utility */
+.fade-in { animation: fadeInUp 0.7s ease both; }
+
+/* ensure images keep block formatting inside cards */
+.project-card img { display: block; }
+
+/* end of file */
